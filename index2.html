@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ViperEngine Documentation</title>
+  <style>
+    body {
+      background: #111;
+      color: #eee;
+      font-family: monospace;
+      padding: 30px;
+      max-width: 900px;
+      margin: auto;
+      line-height: 1.6;
+    }
+    h1, h2, h3 {
+      color: #00ffcc;
+      margin-top: 1.5em;
+    }
+    a {
+      color: #00ccff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    pre {
+      background: #222;
+      padding: 15px;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-size: 1rem;
+      line-height: 1.3;
+      margin-top: 0.5em;
+      margin-bottom: 1.5em;
+    }
+    ul {
+      padding-left: 20px;
+      margin-top: 0.5em;
+    }
+    li {
+      margin-bottom: 0.5em;
+    }
+    code {
+      background: #333;
+      padding: 2px 5px;
+      border-radius: 3px;
+    }
+    hr {
+      border: 0;
+      height: 1px;
+      background: #00ffcc;
+      margin: 2em 0;
+      opacity: 0.3;
+    }
+  </style>
+</head>
+<body>
+  <h1>ViperEngine Documentation</h1>
+  <p>Welcome to the official documentation for <strong>ViperEngine</strong>, a minimal yet powerful 2D game development framework inspired by Pygame but built on SDL2 and Python's ctypes for performance and flexibility.</p>
+
+  <hr />
+
+  <h2>🚀 Getting Started</h2>
+  <p>To install ViperEngine, simply run:</p>
+  <pre>pip install ViperEngine</pre>
+  <p>Make sure you have Python 3.6 or higher installed on your system.</p>
+  <p>Once installed, you can begin building your game using the familiar API patterns inspired by Pygame, but with lower-level control.</p>
+
+  <hr />
+
+  <h2>🧱 Quick Start Example</h2>
+  <p>Here is a minimal example that opens a window, listens for the quit event, and updates the screen at 60 FPS:</p>
+  <pre>
+import viperengine as ve
+
+ve.init()  # Initialize the engine and SDL2 subsystems
+
+screen = ve.Display().set_mode((640, 480))  # Create a window of 640x480 pixels
+screen.set_caption("Hello Viper")          # Set the window title
+
+clock = ve.Clock()  # Create a clock object to manage FPS
+
+running = True
+while running:
+    screen.paint((0, 0, 0))  # Clear screen with black color
+
+    # Poll for input events (keyboard, mouse, window)
+    for event in ve.poll_event() or []:
+        if event["type"] == "QUIT":
+            running = False  # Exit the loop if the window is closed
+
+    screen.update()   # Update the window with new frame contents
+    clock.tick(60)    # Limit loop to 60 frames per second
+
+ve.quit()  # Cleanly shut down the engine
+  </pre>
+
+  <p>This example covers the basic game loop pattern, event polling, drawing, and frame rate control.</p>
+
+  <hr />
+
+  <h2>📚 API Overview</h2>
+  <p>Here’s a quick rundown of the main classes and functions you will use in ViperEngine:</p>
+
+  <ul>
+    <li><strong>Display</strong>: Represents the game window. Use <code>set_mode()</code> to set size, <code>set_caption()</code> to change title, <code>paint()</code> to fill the screen with color, and <code>update()</code> to refresh the display.</li>
+
+    <li><strong>Rect</strong>: Utility class for rectangular shapes. Useful for positioning, collision detection, and managing sprite bounds.</li>
+
+    <li><strong>Surface</strong>: Represents images and textures. Load images from files, draw them on the screen, and manipulate pixels.</li>
+
+    <li><strong>poll_event()</strong>: Polls SDL2 events such as keyboard input, mouse clicks, and window actions. Returns a list of event dictionaries.</li>
+
+    <li><strong>Clock</strong>: Controls the game loop timing, allowing you to cap the frames per second using <code>tick(fps)</code>.</li>
+  </ul>
+
+  <hr />
+
+  <h2>🎨 Drawing and Rendering</h2>
+  <p>ViperEngine lets you draw basic shapes and images. For example:</p>
+  <pre>
+screen.paint((255, 255, 255))  # Fill screen with white
+screen.draw_rect((255, 0, 0), (50, 50, 100, 100))  # Draw red rectangle
+surface = ve.Surface("player.png")  # Load an image
+screen.blit(surface, (200, 150))    # Draw the image at (200,150)
+screen.update()
+  </pre>
+
+  <hr />
+
+  <h2>⌨️ Event Handling</h2>
+  <p>Events are returned as dictionaries with a <code>type</code> field (e.g. <code>KEYDOWN</code>, <code>QUIT</code>). For example, handle keyboard input:</p>
+  <pre>
+for event in ve.poll_event() or []:
+    if event["type"] == "KEYDOWN":
+        if event["key"] == "ESCAPE":
+            running = False
+  </pre>
+
+  <hr />
+
+  <h2>⚙️ Configuration & Setup</h2>
+  <p>Make sure SDL2 is installed on your system, as ViperEngine depends on it. On Windows, you can bundle SDL2 DLLs with your application. On Linux/macOS, install via package managers.</p>
+
+  <hr />
+
+  <p><a href="index.html">🔙 Back to Home</a></p>
+
+  <footer style="margin-top: 4em; font-size: 0.8em; color: #555;">
+    &copy; 2025 Aynu • ViperEngine - Minimal SDL2 Python Game Engine
+  </footer>
+</body>
+</html>
