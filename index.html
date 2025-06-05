@@ -2,48 +2,158 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>ViperEngine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ViperEngine Documentation</title>
   <style>
-    body {
-      background: #0d0d0d;
-      color: #00ffcc;
-      font-family: monospace;
-      text-align: center;
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
-    header {
-      background: #1a1a1a;
-      padding: 20px 0;
-      font-size: 2em;
+    body {
+      background: #0a0a0a;
+      color: #d7fff6;
+      font-family: 'Courier New', monospace;
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: auto;
+      line-height: 1.8;
+    }
+    h1, h2, h3 {
+      color: #00ffe7;
+      margin-top: 2em;
+      margin-bottom: 0.5em;
+    }
+    h1 {
+      font-size: 2.4em;
+      margin-top: 0;
     }
     a {
       color: #00ccff;
       text-decoration: none;
-      margin: 0 10px;
     }
     a:hover {
       text-decoration: underline;
     }
-    main {
-      padding: 40px;
+    pre {
+      background: #121212;
+      padding: 18px;
+      border-radius: 10px;
+      overflow-x: auto;
+      font-size: 0.95em;
+      margin: 1em 0 2em;
+      box-shadow: 0 0 10px #00ffe711;
     }
-    footer {
-      margin-top: 40px;
-      padding: 10px;
-      background: #1a1a1a;
-      font-size: 0.9em;
+    code {
+      background: #222;
+      padding: 3px 6px;
+      border-radius: 4px;
+      color: #7efdfb;
+    }
+    ul {
+      margin-top: 0.5em;
+      margin-bottom: 2em;
+      padding-left: 1.5em;
+    }
+    li {
+      margin-bottom: 0.6em;
+    }
+    hr {
+      border: none;
+      height: 1px;
+      background: #00ffcc;
+      opacity: 0.15;
+      margin: 3em 0;
+    }
+    .back {
+      display: inline-block;
+      margin-top: 3em;
+      font-size: 1em;
+      color: #00ccff;
+      border: 1px solid #00ccff44;
+      padding: 10px 18px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+    .back:hover {
+      background: #00ccff22;
+      transform: scale(1.03);
     }
   </style>
 </head>
 <body>
-  <header>🐍 ViperEngine</header>
-  <main>
-    <p>A minimal Pygame-like 2D engine using SDL2.</p>
-    <p>Build retro-style games easily with low-level power.</p>
-    <a href="index2.html">📘 View Documentation</a>
-    <a href="https://pypi.org/project/ViperEngine/">⬇️ Download on PyPI</a>
-    <a href="https://github.com/ViperEngine">🌐 GitHub</a>
-  </main>
+  <h1>ViperEngine Documentation</h1>
+  <p><strong>ViperEngine</strong> is a minimalist 2D game framework built on SDL2 for fast, flexible development. It follows Pygame-like patterns but with a cleaner, lower-level interface.</p>
+
+  <hr />
+
+  <h2>🚀 Getting Started</h2>
+  <p>Install with:</p>
+  <pre>pip install ViperEngine</pre>
+  <p>Requires Python 3.6+ and SDL2 installed on your system.</p>
+
+  <hr />
+
+  <h2>🧱 Quick Start</h2>
+  <pre>
+import viperengine as ve
+
+ve.init()
+
+screen = ve.Display().set_mode((640, 480))
+screen.set_caption("Hello Viper")
+
+clock = ve.Clock()
+running = True
+
+while running:
+    screen.paint((0, 0, 0))
+    for event in ve.poll_event() or []:
+        if event["type"] == "QUIT":
+            running = False
+    screen.update()
+    clock.tick(60)
+
+ve.quit()
+  </pre>
+
+  <hr />
+
+  <h2>📚 API Overview</h2>
+  <ul>
+    <li><strong>Display</strong>: <code>set_mode()</code>, <code>set_caption()</code>, <code>paint()</code>, <code>update()</code></li>
+    <li><strong>Rect</strong>: For position and collision detection.</li>
+    <li><strong>Surface</strong>: For loading and rendering images.</li>
+    <li><strong>poll_event()</strong>: For input and window events.</li>
+    <li><strong>Clock</strong>: Regulates frame timing via <code>tick()</code>.</li>
+  </ul>
+
+  <hr />
+
+  <h2>🎨 Drawing</h2>
+  <pre>
+screen.paint((255, 255, 255))
+screen.draw_rect((255, 0, 0), (50, 50, 100, 100))
+sprite = ve.Surface("player.png")
+screen.blit(sprite, (200, 150))
+screen.update()
+  </pre>
+
+  <hr />
+
+  <h2>⌨️ Event Handling</h2>
+  <pre>
+for event in ve.poll_event() or []:
+    if event["type"] == "KEYDOWN":
+        if event["key"] == "ESCAPE":
+            running = False
+  </pre>
+
+  <hr />
+
+  <h2>⚙️ SDL2 Setup</h2>
+  <p>Install SDL2 separately. On Linux/macOS: use your package manager. On Windows: include the DLLs with your project folder.</p>
+
+  <a href="index.html" class="back">🔙 Back to Home</a>
 </body>
 </html>
